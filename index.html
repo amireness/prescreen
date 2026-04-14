@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Your App Name] — Minerva University</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container hero-card">
+            <p class="eyebrow">Minerva-style Admissions</p>
+            <h1>Learn. Belong. Lead.</h1>
+            <p class="hero-subtitle">Admissions Pre-Screening Simulator</p>
+            <p class="hero-copy">This tool helps you understand your relative strength as an applicant based on Minerva-style evaluation criteria. It does not predict admissions outcomes.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="application-flow" class="step-card">
+            <div class="section-header">
+                <span class="section-label">Application Flow</span>
+                <h2>Step-by-step applicant review</h2>
+            </div>
+            <div id="step-indicator" class="step-indicator">Step 1 of 6</div>
+            <form id="evaluation-form" class="form-card" onsubmit="return false;">
+                <div id="step-1" class="step active-step">
+                    <h3>Academic Background</h3>
+                    <div class="field-row">
+                        <label for="gpa">GPA (0.0–4.0)</label>
+                        <input id="gpa" name="gpa" type="number" min="0" max="4" step="0.01" placeholder="3.75">
+                    </div>
+                    <div class="field-row">
+                        <label for="school-name">School name</label>
+                        <input id="school-name" name="school-name" type="text" placeholder="School or program name">
+                    </div>
+                    <div class="field-row">
+                        <label for="country">Country</label>
+                        <input id="country" name="country" type="text" placeholder="Country of schooling">
+                    </div>
+                    <div class="field-row">
+                        <label for="curriculum">Curriculum</label>
+                        <select id="curriculum" name="curriculum">
+                            <option value="IB">IB</option>
+                            <option value="AP">AP</option>
+                            <option value="National">National</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="button-row">
+                        <button type="button" class="next-button" data-next-step="1">Next</button>
+                    </div>
+                </div>
+
+                <div id="step-2" class="step">
+                    <h3>Activities</h3>
+                    <p class="muted-copy">Share up to five meaningful activities. Each entry should include category, role, hours, level, recognition, and impact.</p>
+                    <div id="activity-container"></div>
+                    <button type="button" id="add-activity-btn" class="secondary-button">+ Add Activity</button>
+                    <p id="activity-warning" class="muted-copy hidden">Maximum 5 activities</p>
+                    <div class="button-row">
+                        <button type="button" class="back-button" data-prev-step="0">Back</button>
+                        <button type="button" class="next-button" data-next-step="2">Next</button>
+                    </div>
+                </div>
+
+                <div id="step-3" class="step">
+                    <h3>Context</h3>
+                    <p class="muted-copy">This statement helps us understand the context and constraints behind your profile.</p>
+                    <label for="resource-context">Resource context</label>
+                    <select id="resource-context" name="resource-context">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <div class="button-row">
+                        <button type="button" class="back-button" data-prev-step="1">Back</button>
+                        <button type="button" class="next-button" data-next-step="3">Next</button>
+                    </div>
+                </div>
+
+                <div id="step-4" class="step">
+                    <h3>Optional Statement</h3>
+                    <p class="muted-copy">Write a short contextual statement about your background, constraints, or particular learning conditions.</p>
+                    <label for="statement">Context statement (optional)</label>
+                    <textarea id="statement" name="statement" rows="4" placeholder="Explain any factors that shaped your profile."></textarea>
+                    <div class="button-row">
+                        <button type="button" class="back-button" data-prev-step="2">Back</button>
+                        <button type="button" id="evaluate-btn">Evaluate</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section id="results-dashboard" class="results-card hidden"></section>
+
+        <section id="timeline-card" class="timeline-card">
+            <div class="section-header">
+                <span class="section-label">Admissions Timeline</span>
+                <h2>Application cycle milestones</h2>
+            </div>
+            <table class="timeline-table">
+                <thead>
+                    <tr>
+                        <th>Round</th>
+                        <th>Deadline</th>
+                        <th>Decision</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Early Action</td><td>Nov 1</td><td>Dec 19</td></tr>
+                    <tr><td>Regular Decision I</td><td>Jan 13</td><td>Mar 5</td></tr>
+                    <tr><td>Regular Decision II</td><td>Feb 24</td><td>Apr 10</td></tr>
+                    <tr><td>Extended Decision</td><td>Apr 7</td><td>Apr 24</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="disclaimer-card">
+            <p><strong>Disclaimer:</strong> This tool is a simulation based on synthetic data and heuristic scoring. It does not represent Minerva University's admissions decisions.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="copyright">
+                &copy; 2026 Minerva University Student Project
+            </div>
+            <!-- MANDATORY AI DISCLOSURE (per Minerva Guardrails) -->
+            <div class="ai-disclosure">
+                <span class="badge">AI-Assisted</span>
+                Developed with Gemini CLI & Minerva AI Framework
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
