@@ -17,6 +17,45 @@ const WEIGHTS = {
   distinction: 0.15
 };
 
+function validateCurrentStep() {
+  const currentStep = state.currentStep;
+  if (currentStep === 0) { // Academic Background
+    const gpa = document.getElementById('gpa').value.trim();
+    if (!gpa) {
+      alert('Please fill in the GPA field.');
+      document.getElementById('gpa').focus();
+      return false;
+    }
+    const schoolName = document.getElementById('school-name').value.trim();
+    if (!schoolName) {
+      alert('Please fill in the School name field.');
+      document.getElementById('school-name').focus();
+      return false;
+    }
+    const country = document.getElementById('country').value;
+    if (!country) {
+      alert('Please select a country.');
+      document.getElementById('country').focus();
+      return false;
+    }
+    const curriculum = document.getElementById('curriculum').value;
+    if (!curriculum) {
+      alert('Please select a curriculum.');
+      document.getElementById('curriculum').focus();
+      return false;
+    }
+    if (curriculum === 'Other') {
+      const other = document.getElementById('other-curriculum').value.trim();
+      if (!other) {
+        alert('Please specify the curriculum.');
+        document.getElementById('other-curriculum').focus();
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 function init() {
   const nextButtons = document.querySelectorAll('.next-button');
   nextButtons.forEach(button => button.addEventListener('click', handleNext));
@@ -25,17 +64,28 @@ function init() {
   document.getElementById('evaluate-btn').addEventListener('click', evaluateApplicant);
   document.getElementById('add-activity-btn').addEventListener('click', addActivityBlock);
   document.getElementById('activity-container').addEventListener('click', handleActivityContainerClick);
+  document.getElementById('curriculum').addEventListener('change', function() {
+    const otherInput = document.getElementById('other-curriculum');
+    if (this.value === 'Other') {
+      otherInput.style.display = 'block';
+    } else {
+      otherInput.style.display = 'none';
+      otherInput.value = '';
+    }
+  });
   renderActivityBlocks();
   updateStepIndicator();
   showStep(state.currentStep);
 }
 
 function handleNext(event) {
+  if (!validateCurrentStep()) return;
   const nextIndex = Number(event.target.dataset.nextStep);
   if (nextIndex >= 0 && nextIndex < STEP_IDS.length) {
     state.currentStep = nextIndex;
     updateStepIndicator();
     showStep(nextIndex);
+    window.scrollTo(0, 0);
   }
 }
 
@@ -45,6 +95,7 @@ function handleBack(event) {
     state.currentStep = prevIndex;
     updateStepIndicator();
     showStep(prevIndex);
+    window.scrollTo(0, 0);
   }
 }
 
@@ -90,7 +141,7 @@ function collectFormValues() {
     gpa: Number(document.getElementById('gpa').value) || 0,
     schoolName: document.getElementById('school-name').value.trim(),
     country: document.getElementById('country').value.trim(),
-    curriculum: document.getElementById('curriculum').value,
+    curriculum: document.getElementById('curriculum').value === 'Other' ? document.getElementById('other-curriculum').value.trim() : document.getElementById('curriculum').value,
     activities: collectActivities(),
     resourceContext: document.getElementById('resource-context').value,
     statement: document.getElementById('statement').value.trim()
