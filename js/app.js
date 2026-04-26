@@ -26,18 +26,49 @@ function validateCurrentStep() {
       document.getElementById('gpa').focus();
       return false;
     }
-    const schoolName = document.getElementById('school-name').value.trim();
-    if (!schoolName) {
-      alert('Please fill in the School name field.');
-      document.getElementById('school-name').focus();
-      return false;
-    }
+
     const country = document.getElementById('country').value;
     if (!country) {
       alert('Please select a country.');
       document.getElementById('country').focus();
       return false;
     }
+
+    if (country === 'United States') {
+      const stateVal = document.getElementById('state').value;
+      if (!stateVal) {
+        alert('Please select a state.');
+        document.getElementById('state').focus();
+        return false;
+      }
+    }
+
+    if (country !== 'Other') {
+      const city = document.getElementById('city').value;
+      if (!city) {
+        alert('Please select a city.');
+        document.getElementById('city').focus();
+        return false;
+      }
+    }
+
+    const schoolSelect = document.getElementById('school-name');
+    const schoolValue = schoolSelect.value;
+    if (!schoolValue) {
+      alert('Please select a school.');
+      schoolSelect.focus();
+      return false;
+    }
+
+    if (schoolValue === 'Other') {
+      const otherSchool = document.getElementById('other-school').value.trim();
+      if (!otherSchool) {
+        alert('Please specify the school name.');
+        document.getElementById('other-school').focus();
+        return false;
+      }
+    }
+
     const curriculum = document.getElementById('curriculum').value;
     if (!curriculum) {
       alert('Please select a curriculum.');
@@ -56,23 +87,199 @@ function validateCurrentStep() {
   return true;
 }
 
+// Helper functions
+function resetSelect(select, placeholder) {
+  if (!select) return;
+  select.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
+}
+
+function addOption(select, value, text) {
+  if (!select) return;
+  const option = document.createElement('option');
+  option.value = value;
+  option.textContent = text || value;
+  select.appendChild(option);
+}
+
 function init() {
+  console.log('Initializing application...');
+  
+  // Step navigation
   const nextButtons = document.querySelectorAll('.next-button');
   nextButtons.forEach(button => button.addEventListener('click', handleNext));
   const backButtons = document.querySelectorAll('.back-button');
   backButtons.forEach(button => button.addEventListener('click', handleBack));
-  document.getElementById('evaluate-btn').addEventListener('click', evaluateApplicant);
-  document.getElementById('add-activity-btn').addEventListener('click', addActivityBlock);
-  document.getElementById('activity-container').addEventListener('click', handleActivityContainerClick);
-  document.getElementById('curriculum').addEventListener('change', function() {
-    const otherInput = document.getElementById('other-curriculum');
-    if (this.value === 'Other') {
-      otherInput.style.display = 'block';
-    } else {
-      otherInput.style.display = 'none';
-      otherInput.value = '';
+  
+  // Feature buttons
+  const evalBtn = document.getElementById('evaluate-btn');
+  if (evalBtn) evalBtn.addEventListener('click', evaluateApplicant);
+  
+  const addActBtn = document.getElementById('add-activity-btn');
+  if (addActBtn) addActBtn.addEventListener('click', addActivityBlock);
+  
+  const actContainer = document.getElementById('activity-container');
+  if (actContainer) actContainer.addEventListener('click', handleActivityContainerClick);
+  
+  // Curriculum listener
+  const curriculumSelect = document.getElementById('curriculum');
+  if (curriculumSelect) {
+    curriculumSelect.addEventListener('change', function() {
+      const otherInput = document.getElementById('other-curriculum');
+      if (otherInput) {
+        if (this.value === 'Other') {
+          otherInput.style.display = 'block';
+        } else {
+          otherInput.style.display = 'none';
+          otherInput.value = '';
+        }
+      }
+    });
+  }
+
+  // Select elements and rows
+  const countrySelect = document.getElementById('country');
+  const stateRow = document.getElementById('state-row');
+  const stateSelect = document.getElementById('state');
+  const cityRow = document.getElementById('city-row');
+  const citySelect = document.getElementById('city');
+  const schoolRow = document.getElementById('school-row');
+  const schoolSelect = document.getElementById('school-name');
+  const otherSchoolInput = document.getElementById('other-school');
+
+  // Populate countries initially
+  if (countrySelect) {
+    resetSelect(countrySelect, 'Select country');
+    
+    let countriesFound = false;
+    try {
+      if (window.schoolData && typeof window.schoolData === 'object') {
+        const countries = Object.keys(window.schoolData);
+        if (countries.length > 0) {
+          countries.sort().forEach(country => {
+            addOption(countrySelect, country);
+          });
+          countriesFound = true;
+        }
+      }
+    } catch (e) {
+      console.error('Error reading schoolData:', e);
     }
-  });
+
+    if (!countriesFound) {
+      console.warn('No schoolData found, using fallback countries.');
+      ['United States', 'United Kingdom', 'Canada', 'Germany', 'France', 'India', 'China'].forEach(country => {
+        addOption(countrySelect, country);
+      });
+    }
+    
+    addOption(countrySelect, 'Other');
+  }
+
+  // Country change logic
+  if (countrySelect) {
+    countrySelect.addEventListener('change', function() {
+      const country = this.value;
+      resetSelect(stateSelect, 'Select state');
+      resetSelect(citySelect, 'Select city');
+      resetSelect(schoolSelect, 'Select school');
+      if (stateRow) stateRow.style.display = 'none';
+      if (cityRow) cityRow.style.display = 'none';
+      if (schoolRow) schoolRow.style.display = 'none';
+      if (otherSchoolInput) {
+        otherSchoolInput.style.display = 'none';
+        otherSchoolInput.value = '';
+      }
+
+      if (country === 'Other') {
+        if (schoolRow) schoolRow.style.display = 'block';
+        addOption(schoolSelect, 'Other');
+        schoolSelect.value = 'Other';
+        if (otherSchoolInput) otherSchoolInput.style.display = 'block';
+      } else if (window.schoolData && window.schoolData[country]) {
+        const countryInfo = window.schoolData[country];
+        if (countryInfo.type === 'states') {
+          if (stateRow) stateRow.style.display = 'block';
+          Object.keys(countryInfo.data).sort().forEach(state => addOption(stateSelect, state));
+          addOption(stateSelect, 'Other');
+        } else {
+          if (cityRow) cityRow.style.display = 'block';
+          Object.keys(countryInfo).sort().forEach(city => addOption(citySelect, city));
+          addOption(citySelect, 'Other');
+        }
+      }
+    });
+  }
+
+  // State change logic
+  if (stateSelect) {
+    stateSelect.addEventListener('change', function() {
+      const country = countrySelect ? countrySelect.value : '';
+      const state = this.value;
+      resetSelect(citySelect, 'Select city');
+      resetSelect(schoolSelect, 'Select school');
+      if (cityRow) cityRow.style.display = 'block';
+      if (schoolRow) schoolRow.style.display = 'none';
+      if (otherSchoolInput) {
+        otherSchoolInput.style.display = 'none';
+
+        if (state === 'Other') {
+          addOption(citySelect, 'Other');
+          citySelect.value = 'Other';
+          if (schoolRow) schoolRow.style.display = 'block';
+          addOption(schoolSelect, 'Other');
+          schoolSelect.value = 'Other';
+          if (otherSchoolInput) otherSchoolInput.style.display = 'block';
+        } else if (window.schoolData && window.schoolData[country] && window.schoolData[country].data && window.schoolData[country].data[state]) {
+          const cities = Object.keys(window.schoolData[country].data[state]);
+          cities.sort().forEach(city => addOption(citySelect, city));
+          addOption(citySelect, 'Other');
+        }
+      }
+    });
+  }
+
+  // City change logic
+  if (citySelect) {
+    citySelect.addEventListener('change', function() {
+      const country = countrySelect ? countrySelect.value : '';
+      const stateVal = stateSelect ? stateSelect.value : '';
+      const city = this.value;
+      resetSelect(schoolSelect, 'Select school');
+      if (schoolRow) schoolRow.style.display = 'block';
+      if (otherSchoolInput) otherSchoolInput.style.display = 'none';
+
+      if (city === 'Other') {
+        addOption(schoolSelect, 'Other');
+        schoolSelect.value = 'Other';
+        if (otherSchoolInput) otherSchoolInput.style.display = 'block';
+      } else if (window.schoolData && window.schoolData[country]) {
+        let schools = [];
+        if (country === 'United States' && window.schoolData[country].data && window.schoolData[country].data[stateVal]) {
+          schools = window.schoolData[country].data[stateVal][city] || [];
+        } else {
+          schools = window.schoolData[country][city] || [];
+        }
+        schools.sort().forEach(school => addOption(schoolSelect, school));
+        addOption(schoolSelect, 'Other');
+      }
+    });
+  }
+
+  // School change logic
+  if (schoolSelect) {
+    schoolSelect.addEventListener('change', function() {
+      if (this.value === 'Other') {
+        if (otherSchoolInput) otherSchoolInput.style.display = 'block';
+      } else {
+        if (otherSchoolInput) {
+          otherSchoolInput.style.display = 'none';
+          otherSchoolInput.value = '';
+        }
+      }
+    });
+  }
+
+  // Initial UI state
   renderActivityBlocks();
   updateStepIndicator();
   showStep(state.currentStep);
@@ -137,10 +344,17 @@ function evaluateApplicant() {
 }
 
 function collectFormValues() {
+  const schoolSelect = document.getElementById('school-name');
+  const schoolValue = schoolSelect.value;
+  const schoolName = schoolValue === 'Other' ? document.getElementById('other-school').value.trim() : schoolValue;
+  const country = document.getElementById('country').value.trim();
+  const stateVal = country === 'United States' ? document.getElementById('state').value : '';
+
   return {
     gpa: Number(document.getElementById('gpa').value) || 0,
-    schoolName: document.getElementById('school-name').value.trim(),
-    country: document.getElementById('country').value.trim(),
+    schoolName: schoolName,
+    country: country,
+    state: stateVal,
     curriculum: document.getElementById('curriculum').value === 'Other' ? document.getElementById('other-curriculum').value.trim() : document.getElementById('curriculum').value,
     activities: collectActivities(),
     resourceContext: document.getElementById('resource-context').value,

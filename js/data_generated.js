@@ -1,7 +1,3 @@
-/*
- * data.js — Synthetic reference applicants and school data
- */
-
 window.schoolData = {
   "United States": {
     "type": "states",
@@ -4045,127 +4041,65 @@ window.schoolData = {
     ]
   },
   "Kazakhstan": {
-    "Almaty": [
-      "Haileybury Almaty",
-      "QSI International School of Almaty",
-      "NIS of Physics and Mathematics Almaty",
-      "NIS of Chemistry and Biology Almaty",
-      "Miras International School Almaty",
-      "Kazakhstan International School (KIS)",
-      "Almaty International School (AIS)",
-      "Dostyk Bilim-Innovation Lyceum",
-      "Galaxy International School",
-      "Tamos Education"
-    ],
     "Astana": [
-      "Haileybury Astana",
-      "QSI International School of Astana",
-      "NIS Physics and Mathematics Astana",
-      "NIS International Baccalaureate Astana",
-      "Miras International School Astana",
-      "Ardingly Astana",
-      "Nurorda Bilim-Innovation Lyceum",
-      "Spectrum International School",
-      "Blue Sail Academy",
-      "Alpamys School"
+      "National Astana Secondary School",
+      "Central Astana High School",
+      "City Astana International School",
+      "Modern Astana Academy",
+      "Global Astana Public School",
+      "Elite Astana College",
+      "Royal Astana Secondary School",
+      "Saint Astana High School",
+      "Green Astana International School",
+      "Heritage Astana Academy"
+    ],
+    "Almaty": [
+      "National Almaty Secondary School",
+      "Central Almaty High School",
+      "City Almaty International School",
+      "Modern Almaty Academy",
+      "Global Almaty Public School",
+      "Elite Almaty College",
+      "Royal Almaty Secondary School",
+      "Saint Almaty High School",
+      "Green Almaty International School",
+      "Heritage Almaty Academy"
     ],
     "Shymkent": [
-      "NIS Physics and Mathematics Shymkent",
-      "NIS Chemistry and Biology Shymkent",
-      "Shymkent Bilim-Innovation Lyceum",
-      "Alan International School",
-      "Ziyatker Private School",
-      "Seitzhan School",
-      "JOO High School",
-      "Cambridge Line School",
-      "125 High School",
-      "Oscar Private School"
+      "National Shymkent Secondary School",
+      "Central Shymkent High School",
+      "City Shymkent International School",
+      "Modern Shymkent Academy",
+      "Global Shymkent Public School",
+      "Elite Shymkent College",
+      "Royal Shymkent Secondary School",
+      "Saint Shymkent High School",
+      "Green Shymkent International School",
+      "Heritage Shymkent Academy"
     ],
     "Karaganda": [
-      "NIS Chemistry and Biology Karaganda",
-      "Karaganda Bilim-Innovation Lyceum",
-      "Gymnasium No. 39 (M. Zhumabaev)",
-      "Gymnasium No. 93",
-      "Murager Specialized School for Gifted Children",
-      "Daryn Specialized School",
-      "Alter Private School",
-      "Secondary School No. 23",
-      "Secondary School No. 5",
-      "Secondary School No. 38"
+      "National Karaganda Secondary School",
+      "Central Karaganda High School",
+      "City Karaganda International School",
+      "Modern Karaganda Academy",
+      "Global Karaganda Public School",
+      "Elite Karaganda College",
+      "Royal Karaganda Secondary School",
+      "Saint Karaganda High School",
+      "Green Karaganda International School",
+      "Heritage Karaganda Academy"
     ],
     "Aktobe": [
-      "NIS Physics and Mathematics Aktobe",
-      "Aktobe Bilim-Innovation Lyceum",
-      "Aqbobek International School",
-      "Shanyrak Private School",
-      "Kemel Bilim School",
-      "Kazguu School Aktobe",
-      "125 High School",
-      "Bilim Gymnasium School",
-      "Secondary School-Lyceum No. 20",
-      "Secondary School-Lyceum No. 23"
-    ]
-  },
-  "Mongolia": {
-    "Ulaanbaatar": [
-      "Sant School",
-      "Orchlon International School",
-      "Shine Mongol High School",
-      "International School of Ulaanbaatar (ISU)",
-      "British School of Ulaanbaatar (BSU)",
-      "Hobby International School",
-      "American School of Ulaanbaatar (ASU)",
-      "Mongol-Russian Joint School (School No. 3)",
-      "Public School No. 1",
-      "Public School No. 11 (Advanced Mathematics)"
-    ],
-    "Erdenet": [
-      "Erdenet Complex School",
-      "Laboratory School No. 8",
-      "Orkhon Empathy School",
-      "Secondary School No. 19",
-      "Naran Complex School",
-      "Secondary School No. 15 (Eco School)",
-      "Secondary School No. 12",
-      "Russian School (Affiliate of School No. 19)",
-      "Secondary School No. 4",
-      "Uran Egshig Specialized School of Music and Arts"
-    ],
-    "Darkhan": [
-      "Darkhan-Empathy School",
-      "School No. 1",
-      "School No. 4",
-      "School No. 12",
-      "Oyunii Ireedui Complex School",
-      "School No. 15",
-      "School No. 9",
-      "School No. 16",
-      "Od Complex School",
-      "Darkhan-Uul Specialized School of Mathematics and Physics"
-    ],
-    "Choibalsan": [
-      "School No. 1 (First Secondary School)",
-      "School No. 12",
-      "Kherlen Complex School",
-      "School No. 5",
-      "School No. 8",
-      "School No. 11",
-      "School No. 2",
-      "School No. 6",
-      "Dornod Polytechnic College (High School Division)",
-      "Dornod Empathy School"
-    ],
-    "Mörön": [
-      "Erdmiin Dalai Complex School",
-      "Delgermörön Complex School",
-      "Ireedui 21st Century School",
-      "School No. 1",
-      "School No. 2",
-      "School No. 3",
-      "School No. 4",
-      "School No. 5",
-      "School No. 7",
-      "Khövsgöl Empathy School"
+      "National Aktobe Secondary School",
+      "Central Aktobe High School",
+      "City Aktobe International School",
+      "Modern Aktobe Academy",
+      "Global Aktobe Public School",
+      "Elite Aktobe College",
+      "Royal Aktobe Secondary School",
+      "Saint Aktobe High School",
+      "Green Aktobe International School",
+      "Heritage Aktobe Academy"
     ]
   },
   "Chad": {
@@ -6339,32 +6273,3 @@ window.schoolData = {
     ]
   }
 };
-
-
-window.referenceApplicants = [
-  { academic: 10, impact: 8, leadership: 9, initiative: 8, distinction: 7, overallScore: 86, outcome: 'admitted → research fellowship' },
-  { academic: 9, impact: 7, leadership: 8, initiative: 7, distinction: 6, overallScore: 79, outcome: 'admitted → internship program' },
-  { academic: 8, impact: 6, leadership: 7, initiative: 6, distinction: 5, overallScore: 71, outcome: 'admitted → honors track' },
-  { academic: 7, impact: 7, leadership: 5, initiative: 5, distinction: 4, overallScore: 64, outcome: 'borderline → waitlist' },
-  { academic: 6, impact: 5, leadership: 5, initiative: 4, distinction: 3, overallScore: 55, outcome: 'rejected' },
-  { academic: 9, impact: 9, leadership: 8, initiative: 8, distinction: 8, overallScore: 88, outcome: 'admitted → startup accelerator' },
-  { academic: 8, impact: 8, leadership: 6, initiative: 7, distinction: 6, overallScore: 75, outcome: 'admitted → collaborative lab' },
-  { academic: 7, impact: 9, leadership: 7, initiative: 7, distinction: 5, overallScore: 78, outcome: 'admitted → service leadership' },
-  { academic: 6, impact: 6, leadership: 6, initiative: 6, distinction: 4, overallScore: 64, outcome: 'borderline → campus ambassador' },
-  { academic: 8, impact: 5, leadership: 7, initiative: 8, distinction: 5, overallScore: 73, outcome: 'admitted → startup lab' },
-  { academic: 5, impact: 6, leadership: 4, initiative: 5, distinction: 3, overallScore: 52, outcome: 'rejected' },
-  { academic: 10, impact: 10, leadership: 10, initiative: 10, distinction: 10, overallScore: 100, outcome: 'admitted → leadership cohort' },
-  { academic: 9, impact: 7, leadership: 9, initiative: 7, distinction: 8, overallScore: 84, outcome: 'admitted → global impact program' },
-  { academic: 7, impact: 6, leadership: 5, initiative: 4, distinction: 3, overallScore: 55, outcome: 'rejected' },
-  { academic: 8, impact: 6, leadership: 6, initiative: 5, distinction: 5, overallScore: 66, outcome: 'borderline → gap year' },
-  { academic: 7, impact: 8, leadership: 5, initiative: 6, distinction: 6, overallScore: 71, outcome: 'admitted → multidisciplinary program' },
-  { academic: 6, impact: 7, leadership: 5, initiative: 6, distinction: 4, overallScore: 61, outcome: 'borderline → preparation program' },
-  { academic: 5, impact: 4, leadership: 3, initiative: 4, distinction: 2, overallScore: 42, outcome: 'rejected' },
-  { academic: 9, impact: 8, leadership: 7, initiative: 8, distinction: 7, overallScore: 82, outcome: 'admitted → creative research' },
-  { academic: 8, impact: 7, leadership: 8, initiative: 7, distinction: 6, overallScore: 78, outcome: 'admitted → project incubator' },
-  { academic: 7, impact: 5, leadership: 6, initiative: 5, distinction: 4, overallScore: 62, outcome: 'borderline → leadership track' },
-  { academic: 6, impact: 8, leadership: 6, initiative: 7, distinction: 5, overallScore: 68, outcome: 'admitted → community innovation' },
-  { academic: 7, impact: 9, leadership: 8, initiative: 7, distinction: 6, overallScore: 79, outcome: 'admitted → public impact lab' },
-  { academic: 8, impact: 6, leadership: 5, initiative: 6, distinction: 5, overallScore: 67, outcome: 'borderline → advisory review' },
-  { academic: 9, impact: 6, leadership: 7, initiative: 7, distinction: 6, overallScore: 77, outcome: 'admitted → global network' }
-];

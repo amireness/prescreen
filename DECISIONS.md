@@ -44,3 +44,19 @@
 **Trade-offs**: Development may be slower due to mandatory human review and documentation overhead, but the resulting system is more ethical, secure, and aligned with institutional values.
 
 <!-- Add new decisions below, incrementing the number. -->
+
+## Decision 003 — Cascading School Selection System
+
+**Date**: 2026-04-25
+**Decision**: Implemented a Country -> City -> School cascading dropdown system for the Academic Background step.
+**Rationale**: Improves data consistency and user experience by filtering options, while maintaining flexibility for users whose schools aren't listed through the "Other" option.
+**Alternatives considered**: Free-text input only (less consistent), Single massive dropdown (poor UX).
+**Trade-offs**: Requires more maintenance of the `schoolData` object in `js/data.js`, but provides a more guided and professional experience.
+
+**Guardrails Alignment**:
+- **Privacy & IP**: No student PII is collected; only school names.
+- **Disclosure**: Part of the standard UI interaction.
+- **Responsibility**: Human developer (student) is responsible for the accuracy of the school list.
+- **Bias & Trust**: The "Other" option ensures that students from less-represented schools are not excluded.
+- **Values**: Clarity over cleverness — simple DOM manipulation instead of a complex library.
+
